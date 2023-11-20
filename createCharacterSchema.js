@@ -8,3 +8,10 @@ const createcCharacterSchema = new mongoose.Schema({
   characterClass: String,
   gender: String,
 });
+
+const createCharacterModel = mongoose.model(
+  'characters',
+  createcCharacterSchema
+);
+
+module.exports = createCharacterModel;
