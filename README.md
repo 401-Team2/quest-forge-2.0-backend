@@ -2,7 +2,49 @@
 
 QuestForge is a text-based, Dungeons and Dragons themed, choose-your-own-adventure game with AI-generated dialogue and scenarios. This server repository handles the game's backend logic, including user management, game state control, and interactions with the OpenAI API for scenario generation.
 
-## Installation
+## Table of Contents
+
+1. Project Overview
+
+    - [Features](#features)
+    - [Technology & Language](#technologies-and-languages)
+    - [API Endpoints](#api-endpoints)
+
+2. Getting Started
+
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Trello](#project-management-tool)
+    - [Google Slide Presentation](#presentation)
+    - [Wireframe](#wireframe)
+    <!-- - [Domain Model](#domain-model) -->
+    - [Deployed Server](#deployed-server)
+
+3. [Group Members](#group-members)
+
+4. [License](#license)
+
+## Project Overview
+
+### Features
+
+### Technologies and Languages
+
+- Vite
+- Axios
+- OpenAI
+
+### API Endpoints
+
+POST /startgame: Starts a new game session.
+POST /loadgame: Loads an existing game session.
+POST /createCharacter: Creates a new character.
+
+## Getting Started
+
+### Prerequisites
+
+### Installation
 
 - Clone repository
 
@@ -16,14 +58,27 @@ QuestForge is a text-based, Dungeons and Dragons themed, choose-your-own-adventu
 - Start server
     `npm run dev`
 
-## Technologies & Languages
+### Project Management Tool
 
-- Vite
-- Axios
-- OpenAI
+[Trello]()
 
-## Features
+### Presentation
 
+[GoogleSlides]()
+
+### Wireframe
+
+![Wireframe]()
+
+### Deployed Server
+
+[DeployedLink]()
+
+## Group Members
+
+- Sydney Mae Pagalan
+- Samaad Turner
+- Josh Shea
 
 ## License
 
