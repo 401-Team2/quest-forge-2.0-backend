@@ -10,7 +10,7 @@ class Character {
     this.id = id;
     this.name = name;
     this.age = age;
-    this.characerClass = characerClass;
+    this.characterClass = characerClass;
     this.race = race;
     this.gender = gender;
   }
@@ -18,7 +18,7 @@ class Character {
 
 async function getAllCharacters() {
   try {
-    const response = await axios.get(`${MONGODB_URL}/`);
+    const response = await axios.get(`${MONGODB_URL}/characters`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -28,8 +28,8 @@ async function getAllCharacters() {
 
 async function getOneCharacter(id) {
   try {
-    const response = await axios.get(`${MONGODB_URL}/${id}`);
-    return response.data.
+    const response = await axios.get(`${MONGODB_URL}/characters/:${id}`);
+    return response.data;
   } catch (error) {
     console.error(error);
     return error;

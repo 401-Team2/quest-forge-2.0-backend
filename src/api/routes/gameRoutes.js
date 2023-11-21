@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const gameController = require('../controllers/gameController');
 
-router.post('/startgame', gameController.startNewGame);
-
-router.get('/loadgame/:gameId', gameController.loadGame);
+router.post('/generateStory', gameController.generateStory);
 
 module.exports = router;

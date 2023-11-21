@@ -1,22 +1,19 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
-    name: {
+const gameSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    currentScene: {
         type: String,
         required: true
     },
-    age: {
-        type: Number,
-        required: true
-    },
-    race: {
-        type: String,
-        required: true
-    },
-    class: {
-        type: String,
-        required: true
+    progress: {
+        type: Map,
+        of: String
     },
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Game', gameSchema);
