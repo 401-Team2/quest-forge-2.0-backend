@@ -1,23 +1,22 @@
-const Game = require('../models/Game');
+const { OpenAIAPI } = require('openai');
+require('dotenv').config();
 
-const startNewGame = async (req, res) => {
-    try {
-        res.status(200).json({ message: 'New game started successfully' });
-    } catch (error) {
-        res.status(500).json({ message: 'Error starting new game', error: error.message });
-    }
-};
+// Initialize OpenAI with your API key
+const openai = new OpenAIAPI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
-const loadGame = async (req, res) => {
-    try {
-        const gameId = req.params.gameId;
-        res.status(200).json({ message: 'Game loaded successfully', gameData: {/*...*/} });
-    } catch (error) {
-        res.status(500).json({ message: 'Error loading game', error: error.message });
-    }
-};
+exports.generateStory = async (req, res) => {
+  try {
+    const prompt = req.body.prompt; // Assuming the prompt is sent in the request body
+    const response = await openai.createCompletion({
+      model: 'text-davinci-003', // Specify the model you want to use
+      prompt: prompt,
+      max_tokens: 150,
+    });
 
-module.exports = {
-    startNewGame,
-    loadGame
+    res.json({ story: response.choices[0].text.trim() });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
