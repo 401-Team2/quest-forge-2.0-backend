@@ -19,9 +19,8 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  let { id, name, age, race, characterClass, gender } = req.body;
+  let { name, age, race, characterClass, gender } = req.body;
   let character = new CharacterModel({
-    id,
     name,
     age,
     race,

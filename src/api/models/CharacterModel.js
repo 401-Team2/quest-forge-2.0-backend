@@ -2,7 +2,6 @@
 const mongoose = require('mongoose');
 
 const CharacterSchema = new mongoose.Schema({
-  id: Number,
   name: String,
   age: Number,
   race: String,
