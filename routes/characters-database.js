@@ -18,6 +18,27 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:characterId', async (req, res) => {
+  const { characterId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(characterId)) {
+    res.status(400).send('Invalid character Id.');
+    return;
+  }
+
+  try {
+    let result = await CharacterModel.findById(characterId);
+    if (!result) {
+      res.status(404).send('Character not found');
+    } else {
+      res.json(result);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 router.post('/', async (req, res) => {
   let { name, age, race, characterClass, gender } = req.body;
   let character = new CharacterModel({
