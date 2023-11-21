@@ -21,13 +21,13 @@ app.use(cors());
 
 // console.log('MongoDB URI:', process.env.MONGODB_URI); // For debugging
 
-mongoose
-  .connect(process.env.MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('MongoDB Connected'))
-  .catch((err) => console.log(err));
+// mongoose
+//   .connect(process.env.MONGODB_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => console.log('MongoDB Connected'))
+//   .catch((err) => console.log(err));
 
 // OpenAI initialization
 // const openai = new OpenAI({
@@ -80,7 +80,7 @@ app.get('/characters/all', async (req, res) => {
 app.get('/characters/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const oneCharacter = await getOneCharacter();
+    const oneCharacter = await getOneCharacter(id);
     res.json(oneCharacter);
   } catch (error) {
     console.error('Error:', error);
