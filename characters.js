@@ -3,14 +3,14 @@
 const dotenv = require('dotenv').config();
 const axios = require('axios');
 
-const MONGODB_URL = process.env.MONGODB_URL;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 class Character {
-  constructor(id, name, age, characerClass, race, gender) {
+  constructor(id, name, age, characterClass, race, gender) {
     this.id = id;
     this.name = name;
     this.age = age;
-    this.characerClass = characerClass;
+    this.characterClass = characterClass;
     this.race = race;
     this.gender = gender;
   }
@@ -18,7 +18,7 @@ class Character {
 
 async function getAllCharacters() {
   try {
-    const response = await axios.get(`${MONGODB_URL}/`);
+    const response = await axios.get(`${MONGODB_URI}/characters`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -28,7 +28,7 @@ async function getAllCharacters() {
 
 async function getOneCharacter(id) {
   try {
-    const response = await axios.get(`${MONGODB_URL}/:${id}`);
+    const response = await axios.get(`${MONGODB_URI}/characters/${id}`);
     return response.data;
   } catch (error) {
     console.error(error);
