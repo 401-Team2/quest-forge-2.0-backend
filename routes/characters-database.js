@@ -48,6 +48,7 @@ router.post('/', async (req, res) => {
     characterClass,
     gender,
   });
+  console.log(character);
   try {
     let document = await character.save();
     res.json(document);
