@@ -28,8 +28,8 @@ async function getAllCharacters() {
 
 async function getOneCharacter(id) {
   try {
-    const response = await axios.get(`${MONGODB_URL}/${id}`);
-    return response.data.
+    const response = await axios.get(`${MONGODB_URL}/:${id}`);
+    return response.data;
   } catch (error) {
     console.error(error);
     return error;

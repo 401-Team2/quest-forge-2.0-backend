@@ -3,14 +3,14 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const createCharacterModel = require('../createCharacterSchema.js');
+const CharacterModel = require('../src/api/models/CharacterModel.js');
 const router = express.Router();
 
 router.use(express.json());
 
 router.get('/', async (req, res) => {
   try {
-    let documents = await createCharacterModel.find({});
+    let documents = await CharacterModel.find({});
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   let { id, name, age, race, characterClass, gender } = req.body;
-  let character = new createCharacterModel({
+  let character = new CharacterModel({
     id,
     name,
     age,
@@ -30,6 +30,27 @@ router.post('/', async (req, res) => {
   try {
     let document = await character.save();
     res.json(document);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+router.delete('/:characterId', async (req, res) => {
+  const { characterId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(characterId)) {
+    res.status(400).send('Invalid character Id.');
+    return;
+  }
+
+  try {
+    let result = await CharacterModel.findByIdAndDelete(characterId);
+    if (!result) {
+      res.status(404).send('Character not found');
+    } else {
+      res.status(204).send('Character deleted successfully');
+    }
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
