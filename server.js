@@ -5,6 +5,7 @@ const cors = require('cors');
 const { OpenAI } = require('openai');
 const axios = require('axios');
 require('dotenv').config();
+const { MongoClient } = require('mongodb');
 
 const { getAllCharacters, getOneCharacter } = require('./characters.js');
 
@@ -21,13 +22,32 @@ app.use(cors());
 
 // console.log('MongoDB URI:', process.env.MONGODB_URI); // For debugging
 
-// mongoose
-//   .connect(process.env.MONGODB_URI, {
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('MongoDB Connected'))
+  .catch((err) => console.log(err));
+
+// async function connectToMongoDB() {
+//   const client = new MongoClient(process.env.MONGODB_URI, {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
-//   })
-//   .then(() => console.log('MongoDB Connected'))
-//   .catch((err) => console.log(err));
+//   });
+
+//   try {
+//     await client.connect();
+//     console.log('Connected to MongoDB');
+
+//     // Now you can perform database operations using the "client" object
+//   } finally {
+//     await client.close();
+//     console.log('Disconnected from MongoDB');
+//   }
+// }
+
+// connectToMongoDB();
 
 // OpenAI initialization
 // const openai = new OpenAI({
@@ -67,26 +87,26 @@ app.use(cors());
 
 app.use('/characters', charactersRoute);
 
-app.get('/characters/all', async (req, res) => {
-  try {
-    const allCharacters = await getAllCharacters();
-    res.json(allCharacters);
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
+// app.get('/characters/all', async (req, res) => {
+//   try {
+//     const allCharacters = await getAllCharacters();
+//     res.json(allCharacters);
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// });
 
-app.get('/characters/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const oneCharacter = await getOneCharacter(id);
-    res.json(oneCharacter);
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
+// app.get('/characters/:id', async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     const oneCharacter = await getOneCharacter(id);
+//     res.json(oneCharacter);
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// });
 
 // Game Logic Route
 app.post('/game/generateStory', async (req, res) => {

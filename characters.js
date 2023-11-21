@@ -6,8 +6,7 @@ const axios = require('axios');
 const MONGODB_URI = process.env.MONGODB_URI;
 
 class Character {
-  constructor(id, name, age, characterClass, race, gender) {
-    this.id = id;
+  constructor(name, age, characterClass, race, gender) {
     this.name = name;
     this.age = age;
     this.characterClass = characterClass;
