@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const { getAllCharacters, getOneCharacter } = require('./characters.js');
 
-const charactersRoute = require('./src/api/routes/characterRoutes.js');
+const charactersRoute = require('./routes/characters-database.js');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -22,7 +22,7 @@ app.use(cors());
 // console.log('MongoDB URI:', process.env.MONGODB_URI); // For debugging
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -30,9 +30,9 @@ mongoose
   .catch((err) => console.log(err));
 
 // OpenAI initialization
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
 
 // Character Routes
 // app.post('/createcharacter', async (req, res) => {

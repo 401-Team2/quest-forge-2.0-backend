@@ -11,6 +11,7 @@ router.use(express.json());
 router.get('/', async (req, res) => {
   try {
     let documents = await CharacterModel.find({});
+    res.json(documents);
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
