@@ -1,4 +1,4 @@
-// middleware/authMiddleware.js
+'use strict';
 
 const expressJwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');

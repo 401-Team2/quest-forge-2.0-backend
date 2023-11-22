@@ -7,6 +7,7 @@ const axios = require('axios');
 require('dotenv').config();
 
 const charactersRoute = require('./routes/characters-database.js');
+const awsRoute = require('./routes/awsRoutes.js');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -28,6 +29,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use('/characters', charactersRoute);
+app.use('/aws', awsRoute);
 
 // Game Logic Route
 app.post('/game/generateStory', async (req, res) => {
