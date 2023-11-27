@@ -12,13 +12,8 @@ const awsRoute = require('./routes/awsRoutes.js');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
 app.use(bodyParser.json());
 app.use(cors());
-
-// MongoDB Connection
-
-// console.log('MongoDB URI:', process.env.MONGODB_URI); // For debugging
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -31,7 +26,6 @@ mongoose
 app.use('/characters', charactersRoute);
 app.use('/aws', awsRoute);
 
-// Game Logic Route
 app.post('/game/generateStory', async (req, res) => {
   try {
     const prompt = req.body.prompt;
@@ -46,5 +40,4 @@ app.post('/game/generateStory', async (req, res) => {
   }
 });
 
-// Start Server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
